@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd511q0u54tqe"]
+
+[ext_resource type="Script" path="res://Tile/tile.gd" id="1_wk67o"]
+[ext_resource type="Texture2D" uid="uid://dnatqtf3ltgm0" path="res://Tile/minesweeper.png" id="2_j5kmk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85l8e"]
+size = Vector2(16, 16)
+
+[node name="Tile" type="Node2D"]
+position = Vector2(8, 8)
+script = ExtResource("1_wk67o")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("2_j5kmk")
+region_enabled = true
+region_rect = Rect2(16, 32, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_85l8e")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
