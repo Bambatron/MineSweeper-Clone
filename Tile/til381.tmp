@@ -7,6 +7,7 @@
 size = Vector2(16, 16)
 
 [node name="Tile" type="Node2D"]
+position = Vector2(8, 8)
 script = ExtResource("1_wk67o")
 
 [node name="Area2D" type="Area2D" parent="."]

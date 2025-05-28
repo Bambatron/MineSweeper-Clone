@@ -1,0 +1,11 @@
+Beginner
+- 9x9 board and 10 mines
+- 12% probability of finding mine
+
+Intermediate
+- 16x16 board and 40 mines
+- 15% probability of finding mine
+
+Advanced
+- 24x24 board and 99 mines
+- 17% probability of finding mine

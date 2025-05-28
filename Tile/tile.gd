@@ -1,33 +1,20 @@
 extends Node
 
 # Expose a variable, whose value is saved with the scene and is editable in the editor
-@export var hidden_value:TILE_VALUES
-# Types of tiles
-enum TILE_VALUES {
-	BLANK = 0, # No mines near
-	NUM_1 = 1, # 1 mine near
-	NUM_2 = 2, # 2 mines near
-	NUM_3 = 3, # 3 mines near
-	NUM_4 = 4, # 4 mines near
-	NUM_5 = 5, # 5 mines near
-	NUM_6 = 6, # 6 mines near
-	NUM_7 = 7, # 7 mines near
-	NUM_8 = 8, # 8 mines near
-	MINE = 9, # Mine
-}
+@export var hidden_value:Minesweeper.TILE_VALUES
 
 const tile_size:Vector2i = Vector2i(16,16)
 const pressed_texture_pos = {
-	TILE_VALUES.NUM_1: Vector2i(0,0),
-	TILE_VALUES.NUM_2: Vector2i(16,0),
-	TILE_VALUES.NUM_3: Vector2i(32,0),
-	TILE_VALUES.NUM_4: Vector2i(48,0),
-	TILE_VALUES.NUM_5: Vector2i(0,16),
-	TILE_VALUES.NUM_6: Vector2i(16,16),
-	TILE_VALUES.NUM_7: Vector2i(32,16),
-	TILE_VALUES.NUM_8: Vector2i(48,16),
-	TILE_VALUES.BLANK: Vector2i(0,32),
-	TILE_VALUES.MINE: Vector2i(32,48),
+	Minesweeper.TILE_VALUES.NUM_1: Vector2i(0,0),
+	Minesweeper.TILE_VALUES.NUM_2: Vector2i(16,0),
+	Minesweeper.TILE_VALUES.NUM_3: Vector2i(32,0),
+	Minesweeper.TILE_VALUES.NUM_4: Vector2i(48,0),
+	Minesweeper.TILE_VALUES.NUM_5: Vector2i(0,16),
+	Minesweeper.TILE_VALUES.NUM_6: Vector2i(16,16),
+	Minesweeper.TILE_VALUES.NUM_7: Vector2i(32,16),
+	Minesweeper.TILE_VALUES.NUM_8: Vector2i(48,16),
+	Minesweeper.TILE_VALUES.BLANK: Vector2i(0,32),
+	Minesweeper.TILE_VALUES.MINE: Vector2i(32,48),
 }
 const unopened_texture_pos = Vector2i(16,32)
 const flagged_texture_pos = Vector2i(32,32)
@@ -46,14 +33,14 @@ signal blank_opened
 func open_tile():
 	_is_pressed = true
 	show_hidden_value()
-	if hidden_value == TILE_VALUES.MINE:
+	if hidden_value == Minesweeper.TILE_VALUES.MINE:
 		mine_opened.emit() # Emits signal "mine_opened"
-	elif hidden_value == TILE_VALUES.BLANK:
+	elif hidden_value == Minesweeper.TILE_VALUES.BLANK:
 		blank_opened.emit() # Emits signal "blank_opened"
 
 # Shows the value under on screen
 func show_hidden_value():
-	if _is_pressed and hidden_value == TILE_VALUES.MINE:
+	if _is_pressed and hidden_value == Minesweeper.TILE_VALUES.MINE:
 		sprite.region_rect = Rect2(clicked_mine_texture_pos, tile_size)
 	else:
 		sprite.region_rect = Rect2(pressed_texture_pos[hidden_value], tile_size)
@@ -74,3 +61,6 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 				open_tile()
 			elif Input.is_action_pressed("right_click"):
 				flag_tile()
+
+func get_tile_size() -> Vector2:
+	return Vector2(16,16)

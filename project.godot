@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="MineSweeper"
-run/main_scene="res://scenes/tile.tscn"
+run/main_scene="res://Board/board.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Difficulty="*res://difficulty.gd"
+Minesweeper="*res://minesweeper.gd"
 
 [input]
 
