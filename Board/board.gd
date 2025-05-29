@@ -12,7 +12,7 @@ var board_size:Vector2i
 var mines:int
 
 
-# Called when the node enters the scene tree for the first time.func _ready() -> void:
+# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	board_size = Difficulty.get_size_per_difficulty()
 	mines = Difficulty.get_mines_per_difficulty()
