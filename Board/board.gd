@@ -14,12 +14,8 @@ var mines:int
 
 # Called when the node enters the scene tree for the first time.func _ready() -> void:
 func _ready() -> void:
-	print("ready")
-	Difficulty.choose_difficulty(Difficulty.DIFFICULTY.BEGINNER)
 	board_size = Difficulty.get_size_per_difficulty()
 	mines = Difficulty.get_mines_per_difficulty()
-	print("board size: ", board_size)
-	print("mines: ", mines)
 	
 	# Generates puzzle
 	board = Minesweeper.generate_puzzle(board_size, mines)
