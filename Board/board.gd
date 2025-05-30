@@ -6,11 +6,10 @@ extends Node
 @onready var tile_script = preload("res://Tile/tile.gd")
 var tiles = []
 
-@onready var grid:GridContainer = $VBoxContainer/MarginContainer/GridContainer # The rendered 
+@onready var grid:GridContainer = $MarginContainer/CenterContainer/GridContainer 
 var board = [] # Holds all the hidden values of the puzzle
 var board_size:Vector2i
 var mines:int
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

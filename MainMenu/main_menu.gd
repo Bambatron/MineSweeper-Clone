@@ -7,10 +7,5 @@ extends Control
 func _on_play_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://DifficultyMenu/DifficultyMenu.tscn") # Changes currently laoded scene to the one at file location
 
-
-func _on_options_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://OptionsMenu/OptionsMenu.tscn")
-
-
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()

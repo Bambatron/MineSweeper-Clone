@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 Difficulty="*res://difficulty.gd"
 Minesweeper="*res://minesweeper.gd"
 
+[display]
+
+window/size/viewport_width=300
+window/size/viewport_height=280
+
 [input]
 
 left_click={
