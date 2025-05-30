@@ -20,15 +20,17 @@ func _ready() -> void:
 	board = Minesweeper.generate_puzzle(board_size, mines)
 	
 	# Generate rendered grid
-	set_up_grid()
+	var grid_size:Vector2 = set_up_grid()
+	resize_window(grid_size)
 
-func set_up_grid():
+func set_up_grid() -> Vector2:
 	grid.columns = board_size.x
+	var tile_size
 	for i in range(board_size.y):
 		var row = []
 		for j in range(board_size.x):			
 			var tile = TileScene.instantiate()
-			var tile_size = tile.get_tile_size()
+			tile_size = tile.get_tile_size()
 			tile.hidden_value = board[i][j]
 			tile.position = Vector2i(j*tile_size.x + tile_size.x / 2, i*tile_size.y + tile_size.y / 2)
 			if board[i][j] == Minesweeper.TILE_VALUES.BLANK:
@@ -38,6 +40,15 @@ func set_up_grid():
 			row.append(tile)
 			grid.add_child(tile)
 		tiles.append(row)
+	
+	return Vector2(board_size.x * tile_size.x, board_size.y * tile_size.y)
+
+func resize_window(grid_size) -> void:
+	var margin_size = $MarginContainer.get_minimum_size()
+	print(margin_size)
+	get_window().size = grid_size + margin_size
+
+
 
 func _on_blank_opened(i, j):
 	# Opens all neighbors (we are sure thay are not mines)
