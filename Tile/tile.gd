@@ -50,8 +50,10 @@ func flag_tile():
 	_is_flagged = not _is_flagged
 	if _is_flagged:
 		sprite.region_rect = Rect2(flagged_texture_pos, tile_size)
+		Minesweeper.tile_flagged.emit()
 	else:
 		sprite.region_rect = Rect2(unopened_texture_pos, tile_size)
+		Minesweeper.tile_unflagged.emit()
 
 # this funciton is conneted to Area2D Input event
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:

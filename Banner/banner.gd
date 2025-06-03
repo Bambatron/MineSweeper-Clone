@@ -11,11 +11,15 @@ extends Control
 func _ready() -> void:
 	timer.start()
 	
+	Minesweeper.tile_flagged.connect(_on_tile_flagged)
+	Minesweeper.tile_unflagged.connect(_on_tile_unflagged)
+	
 	set_mine_count(99)
+func _on_tile_flagged():
+	set_mine_count(mine_count - 1)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_tile_unflagged():
+	set_mine_count(mine_count + 1)
 
 func _on_timer_timeout() -> void:
 	total_time_seconds += 1

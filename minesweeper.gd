@@ -1,5 +1,8 @@
 extends Node
 
+signal tile_flagged
+signal tile_unflagged
+
 enum TILE_VALUES {
 	BLANK = 0, # No mines near
 	NUM_1 = 1, # 1 mine near
