@@ -48,7 +48,7 @@ func choose_difficulty(diff):
 func get_choosen_difficulty() -> DIFFICULTY:
 	return _choosen_difficulty
 
-func get_size_per_difficulty() -> Vector2i:
+func get_size_per_difficulty() -> Vector2:
 	return board_size_per_difficulty[_choosen_difficulty]
 	
 func get_mines_per_difficulty() -> int:

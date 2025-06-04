@@ -1,14 +1,13 @@
 extends Node
 
-
-
 @onready var TileScene = preload("res://Tile/tile.tscn")
 @onready var tile_script = preload("res://Tile/tile.gd")
 var tiles = []
 
-@onready var grid:GridContainer = $MarginContainer/CenterContainer/GridContainer 
+@onready var grid:GridContainer = $CenterContainer/GridContainer
 var board = [] # Holds all the hidden values of the puzzle
 var board_size:Vector2i
+var board_pixel_size:Vector2
 var mines:int
 
 # Called when the node enters the scene tree for the first time.
@@ -20,8 +19,7 @@ func _ready() -> void:
 	board = Minesweeper.generate_puzzle(board_size, mines)
 	
 	# Generate rendered grid
-	var grid_size:Vector2 = set_up_grid()
-	resize_window(grid_size)
+	board_pixel_size = set_up_grid()
 
 func set_up_grid() -> Vector2:
 	grid.columns = board_size.x
@@ -42,13 +40,6 @@ func set_up_grid() -> Vector2:
 		tiles.append(row)
 	
 	return Vector2(board_size.x * tile_size.x, board_size.y * tile_size.y)
-
-func resize_window(grid_size) -> void:
-	var margin_size = $MarginContainer.get_minimum_size()
-	print(margin_size)
-	get_window().size = grid_size + margin_size
-
-
 
 func _on_blank_opened(i, j):
 	# Opens all neighbors (we are sure thay are not mines)
@@ -71,6 +62,5 @@ func game_lost():
 	grid.set_process_mode(Node.PROCESS_MODE_DISABLED)
 	#grid.set_process_mode(Node.PROCESS_MODE_INHERIT)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func get_pixel_size() -> Vector2:
+	return board_pixel_size
